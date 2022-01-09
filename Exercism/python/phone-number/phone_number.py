@@ -9,8 +9,12 @@ class PhoneNumber:
 
         if 11 < length < 10:
             raise ValueError(f"Invalid phone number length({length})")
-        if length == 11 and self.number[0] != "1":  # this question accepts +1 only
-            raise ValueError("Invalid country code. Should be +1 for NANP countries.")
+        if (
+            length == 11 and self.number[0] != "1"
+        ):  # this question accepts +1 only
+            raise ValueError(
+                "Invalid country code. Should be +1 for NANP countries."
+            )
         if int(self.number[-7]) < 2:
             raise ValueError("Exchange code should be in range [2-9]")
 

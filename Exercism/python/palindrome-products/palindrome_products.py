@@ -52,11 +52,15 @@ def advance(palin: int, __next: bool, __convert: bool = False) -> int:
         num_str = str(palin)
         new_palin = palin if num_str == num_str[::-1] else mirror(palin)
         while (new_palin < palin, new_palin > palin)[__next]:
-            new_palin = advance(new_palin, __next=(not __next and new_palin < palin))
+            new_palin = advance(
+                new_palin, __next=(not __next and new_palin < palin)
+            )
 
     elif __next and all_digits(str(palin), "9"):  # match(r"^9+$", str(palin)):
         new_palin = palin + 2
-    elif not __next and all_digits(str(palin), "1"):  # match(r"^10+1$", str(palin)):
+    elif not __next and all_digits(
+        str(palin), "1"
+    ):  # match(r"^10+1$", str(palin)):
         new_palin = palin - 2
     elif not __next and palin == 11:
         new_palin = 9
