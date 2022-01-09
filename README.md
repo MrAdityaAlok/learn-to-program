@@ -12,7 +12,7 @@ This repository contains my journey through learning to code.
 
 <!--START_SECTION:progress-->
 ```text
-C               ██████▓░░░░░░░░░░░░░░░░░░   26.76 % 
+C               ███████░░░░░░░░░░░░░░░░░░   28.17 % 
 Python          ██████░░░░░░░░░░░░░░░░░░░   24.62 % 
 Bash            ▓░░░░░░░░░░░░░░░░░░░░░░░░   02.25 % 
 Java            ▒░░░░░░░░░░░░░░░░░░░░░░░░   01.55 % 
