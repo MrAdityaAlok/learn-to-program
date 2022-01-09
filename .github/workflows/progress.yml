@@ -32,5 +32,5 @@ jobs:
         uses: test-room-7/action-update-file@v1
         with:
           file-path: README.md
-          commit-msg: "Chore(Progress): Update exercise progress"
+          commit-msg: "chore(README): update exercise progress"
           github-token: ${{ secrets.GITHUB_TOKEN }}
