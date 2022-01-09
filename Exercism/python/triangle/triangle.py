@@ -2,10 +2,7 @@ from itertools import product
 
 
 def is_triangle(sides) -> bool:
-    for pair in product(sides, repeat=3):
-        if not sum(pair[:2]) >= pair[2] != 0:
-            return False
-    return True
+    return all(sum(pair[:2]) >= pair[2] != 0 for pair in product(sides, repeat=3))
 
 
 def equilateral(sides):
