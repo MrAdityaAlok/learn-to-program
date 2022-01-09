@@ -1,5 +1,5 @@
 gifts = [
-    ("On the {} day of Christmas my true love gave to me: {}"),
+    "On the {} day of Christmas my true love gave to me: {}",
     ("first", "a Partridge in a Pear Tree"),
     ("second", "two Turtle Doves"),
     ("third", "three French Hens"),
@@ -19,7 +19,8 @@ def recite(start_verse, end_verse):
     return [
         gifts[0].format(
             gifts[n][0],
-            f"{', '.join(gifts[day][1] for day in range(n, 1, -1))}{('',', and ')[n>1]}{gifts[1][1]}.",
+            f"{', '.join(gifts[day][1] for day in range(n, 1, -1))}"
+            f"{('',', and ')[n>1]}{gifts[1][1]}.",
         )
         for n in range(start_verse, end_verse + 1)
     ]

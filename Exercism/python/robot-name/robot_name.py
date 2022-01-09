@@ -8,9 +8,9 @@ class Robot:
 
     def __generate(self):
         random.seed()
-        self.name = "".join(random.sample("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 2)) + str(
-            random.randint(100, 999)
-        )
+        self.name = "".join(
+            random.sample("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 2)
+        ) + str(random.randint(100, 999))
 
     def reset(self):
         self.__generate()

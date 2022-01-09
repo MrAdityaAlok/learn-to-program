@@ -8,5 +8,6 @@ def find_anagrams(word, candidates):
     return [
         candidate
         for candidate in candidates
-        if candidate.lower() != word and word_count == Counter(candidate.lower())
+        if candidate.lower() != word
+        and word_count == Counter(candidate.lower())
     ]

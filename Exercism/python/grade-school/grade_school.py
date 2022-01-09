@@ -1,6 +1,6 @@
 class School:
     def __init__(self):
-        """Creates a roster for the school, given student's names along with there grade."""
+        """Initiates database for the school."""
         self._db = {}
 
     def add_student(self, name, grade):
