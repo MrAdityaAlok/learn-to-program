@@ -1,0 +1,18 @@
+version = 1
+#test_patterns = ["python/**", "bash/**", "progress/**" ]
+exclude_patterns = ["**/*_test.py", "**/*_test.sh"]
+
+[[analyzers]]
+name = "python"
+enabled = true
+
+[analyzers.meta]
+runtime_version = "3.x.x"
+
+[[analyzers]]
+name = "shell"
+enabled = true
+
+[[transformers]]
+name = "google-java-format"
+enabled = true

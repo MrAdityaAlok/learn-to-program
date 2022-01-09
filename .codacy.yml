@@ -1,0 +1,6 @@
+---
+exclude_paths:
+  - "**/test/**" # c, java
+  - "**_test.py"
+  - "**_test.sh"
+  - "**.md" # written by exercism

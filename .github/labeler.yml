@@ -1,0 +1,20 @@
+c:
+  - Exercism/c/**/*
+
+python:
+  - Exercism/python/**/*
+
+java:
+  - Exercism/java/**/*
+
+bash:
+  - Exercism/bash/**/*
+
+Progress Bar:
+  - Progress/**/*
+
+Projects:
+  - Projects/**/*
+ 
+Sylvie:
+  - Projects/Sylvie/**/*

@@ -1,0 +1,2 @@
+Why copy() in column() ?
+If someone does: matrix.row(3)[0] = 5, this will alter the data stored in the matrix. Conversely, if they did matrix.column(3)[0] = 5, this would not update the matrix. Making row() behave like column() is simple. The reverse is a fair bit more tricky. Something to think about :) 
