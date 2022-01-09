@@ -3,7 +3,9 @@ def classify(num):
         raise ValueError("Given number is not a natural Number")
     _sum = sum(
         {
-            fact  # starting from 2 as the num itself gets included when starring from 1(which not needed here)
+            # starting from 2 as the num itself gets included
+            # when starring from 1(which not needed here)
+            fact
             for i in range(2, int(num ** 0.5) + 1)
             if not num % i  # i.e if num % i == 0
             for fact in [i, num // i]
