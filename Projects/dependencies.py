@@ -44,7 +44,8 @@ class DependencyInfo:
     def _extract_external_dep(self, dep: Dict):
         def is_external_dependency(dependency_id: str) -> bool:
             # Every external dependency has a hash appended at last to it's id.
-            # So we check if last string is a valid hash then it must be an external pkg.
+            # So we check if last string is a valid hash if it is,
+            # then it must be an external pkg.
             pkg_hash = dependency_id.split("-")[-1]
             if len(pkg_hash) == 64 and len(bytes.fromhex(pkg_hash)) == 32:
                 return True
@@ -118,7 +119,8 @@ def write_build_file(dependencies_info: DepInfo, termux_packages_dir: Path):
                 dependencies_info[dep]["src_sha256"],
                 f"{','.join(['haskell-' + p for p in dependencies_info[dep]['depends_on']])}",
                 termux_packages_dir.as_posix(),
-            ]
+            ],
+            check=True,
         )
 
 
