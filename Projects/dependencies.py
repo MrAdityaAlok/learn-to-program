@@ -13,7 +13,7 @@ Dependencies = NewType("Dependencies", List[PackageName])
 
 DepInfo = Dict[PackageName, Dict[str, Union[SHA256Sum, Dependencies]]]
 
-TERMUX_AVAILABLE_PKGS = list()
+TERMUX_AVAILABLE_PKGS = []
 
 
 class DependencyInfo:
@@ -31,7 +31,7 @@ class DependencyInfo:
                 plan = json_load(f)
             return plan["install-plan"]
 
-        self._deps_info: DepInfo = dict()
+        self._deps_info: DepInfo = {}
         self._cabal_file = cabal_file
         self._extract_deps_info(read_cabal_plan())
 
@@ -57,7 +57,7 @@ class DependencyInfo:
             return dep_name_version[: dep_name_version.rfind("-")]
 
         def extract_depends() -> List[PackageName]:
-            dependencies = list()
+            dependencies = []
             if "depends" in dep:
                 for dep_id in dep["depends"]:
                     if is_external_dependency(dep_id):
