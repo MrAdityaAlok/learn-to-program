@@ -45,8 +45,8 @@ class DependencyInfo:
         def is_external_dependency(dependency_id: str) -> bool:
             # Every external dependency has a hash appended at last to it's id.
             # So we check if last string is a valid hash then it must be an external pkg.
-            hash = dependency_id.split("-")[-1]
-            if len(hash) == 64 and len(bytes.fromhex(hash)) == 32:
+            pkg_hash = dependency_id.split("-")[-1]
+            if len(pkg_hash) == 64 and len(bytes.fromhex(pkg_hash)) == 32:
                 return True
             return False
 
@@ -143,9 +143,11 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    TERMUX_AVAILABLE_PKGS = [pkg.name[8:]  # Remove "haskell-" prefix.
+    TERMUX_AVAILABLE_PKGS = [
+        pkg.name[8:]  # Remove "haskell-" prefix.
         for pkg in args.termux_packages_dir.glob("haskell-*")
-        if pkg.is_dir()]
+        if pkg.is_dir()
+    ]
 
     deps = DependencyInfo(args.cabal_plan, args.cabal_file)
     write_build_file(deps.dependencies_info, args.termux_packages_dir)
