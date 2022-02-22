@@ -143,11 +143,9 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    TERMUX_AVAILABLE_PKGS = list(
-        pkg.name[8:]  # Remove "haskell-" prefix.
+    TERMUX_AVAILABLE_PKGS = [pkg.name[8:]  # Remove "haskell-" prefix.
         for pkg in args.termux_packages_dir.glob("haskell-*")
-        if pkg.is_dir()
-    )
+        if pkg.is_dir()]
 
     deps = DependencyInfo(args.cabal_plan, args.cabal_file)
     write_build_file(deps.dependencies_info, args.termux_packages_dir)
