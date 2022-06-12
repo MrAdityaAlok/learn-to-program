@@ -1,2 +1,9 @@
 .project
 .settings/
+
+# Perl LSP cache
+.pls_cache
+
+# Dalvikvm files
+oat/
+out.dex
