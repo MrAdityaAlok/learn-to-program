@@ -1,17 +1,17 @@
+from json import loads as jsonLoads
+
 from bs4 import BeautifulSoup
 from requests import get
-from json import loads as jsonLoads
 
 DATA = {}
 
 
 def _get_total_num_of_exercises(track_name: str) -> int:
+    track_name = track_name.replace(" ", "")
     return len(
-        jsonLoads(
-            get(
-                f"https://exercism.org/api/v2/tracks/{track_name}/exercises"
-            ).text
-        )["exercises"]
+        get(
+            f"https://exercism.org/api/v2/tracks/{track_name}/exercises"
+        ).json()["exercises"]
     )
 
 
