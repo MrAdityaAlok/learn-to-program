@@ -1,0 +1,4 @@
+1
+digits ==> 1
+outputBase ==> 10
+inputBase ==> 2
