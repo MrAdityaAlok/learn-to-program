@@ -1,34 +1,24 @@
 name: Update progress bar
 on:
-  push:
-    branches: [main]
+  schedule:
+    - cron: "0 1 * * *"
 jobs:
   update-progress-bar:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 2
-
-      - name: Has any file changed
-        uses: marceloprado/has-changed-path@v1
-        id: changed
-        with:
-          paths: Exercism/ Progress/
-
-      - if: steps.changed.outputs.changed == 'true'
-        uses: actions/setup-python@v2
+      
+      - uses: actions/setup-python@v2
         with:
           python-version: "3.10"
 
-      - if: steps.changed.outputs.changed == 'true'
+      - name: Run script
         run: |
           pip install -r Progress/requirements.txt
           python Progress/progress_bar.py
 
       - name: Update Readme
-        if: steps.changed.outputs.changed == 'true'
         uses: test-room-7/action-update-file@v1
         with:
           file-path: README.md
