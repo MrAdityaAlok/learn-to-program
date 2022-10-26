@@ -30,16 +30,17 @@ def _set_data():
             "data-react-data"
         ]
     )["tracks"]
-    print(tracks_data)
+    # print(tracks_data)
 
     for data in tracks_data:
-        track_name = data["title"]
-        if track_name == "All Tracks":
+        track_name = data["slug"]
+        if track_name == None:  # All tracks field have 'None' slug.
             continue
-        print(f"Using: {track_name}")
+        # print(f"Using: {track_name}", end=" ")
         total_exercises = _get_total_num_of_exercises(track_name)
         solved_exercises = data["num_solutions"]
-        DATA[track_name] = solved_exercises / total_exercises * 100
+        # print(f"{solved_exercises}/{total_exercises}")
+        DATA[track_name.capitalize()] = solved_exercises / total_exercises * 100
 
 
 def get_progress():
