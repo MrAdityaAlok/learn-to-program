@@ -8,7 +8,7 @@ This repository contains my journey through learning to code.
 
 <!--START_SECTION:progress-->
 ```text
-Python          █████████▓░░░░░░░░░░░░░░░   39.13 % 
+Python          █████████▓░░░░░░░░░░░░░░░   38.85 % 
 C               ███████░░░░░░░░░░░░░░░░░░   27.40 % 
 Go              ██░░░░░░░░░░░░░░░░░░░░░░░   08.57 % 
 Haskell         █▒░░░░░░░░░░░░░░░░░░░░░░░   05.21 % 
