@@ -27,7 +27,7 @@ static uint8_t where_to_add(roster_t *roster, char *name, uint8_t grade) {
 
 void init_roster(roster_t *roster) { roster->count = 0; }
 
-bool add_student(roster_t *roster, char name[MAX_NAME_LENGTH], uint8_t grade) {
+bool add_student(roster_t *roster, char *name, uint8_t grade) {
   if (roster->count == MAX_STUDENTS || student_exists(roster, name)) {
     // They already exists or MAX_STUDENTS reached.
     return false;
