@@ -55,12 +55,28 @@ bool add_student(roster_t *roster, char *name, uint8_t grade) {
 }
 
 roster_t get_grade(roster_t *roster, uint8_t desired_grade) {
-  roster_t g_roster = {0};
-  for (size_t i = 0; i < roster->count; i++) {
-    if (roster->students[i].grade == desired_grade) {
-      g_roster.students[g_roster.count] = roster->students[i];
-      g_roster.count++;
+  roster_t d_roster = {0};
+  if (roster) { // Null pointer!!!
+    // Since roster is sorted, we need not traverse farther than
+    // roster-->student[i].grade == grade
+    for (size_t i = 0;
+         roster->students[i].grade <= desired_grade && i < roster->count; i++) {
+      if (roster->students[i].grade == desired_grade) {
+        d_roster.students[d_roster.count++] = roster->students[i];
+      }
     }
   }
-  return g_roster;
+
+  return d_roster;
 }
+
+// ============== Note for self: ==============
+/* A possible implementation of get_grade would had been to start the loop from
+first position of desired_grade (using the following algorithm):
+  ==> For this we assume name starts with capital letter.
+  ==> "@" comes before "A" in ASCII table,
+  ==> hence it should be the first one in that grade.
+    size_t i = where_to_add(roster, "@", desired_grade);
+But that would still requires traversing to that position(desired_grade), which
+we are already doing. Hence no need of that.
+*/
