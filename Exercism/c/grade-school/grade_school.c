@@ -48,9 +48,9 @@ bool add_student(roster_t *roster, char *name, uint8_t grade) {
     }
   }
 
-  roster->students[position] = student;
+  roster->students[position].grade = grade;
+  strcpy(roster->students[position].name, name);
   roster->count++;
-
   return true;
 }
 
