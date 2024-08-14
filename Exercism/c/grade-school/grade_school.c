@@ -25,13 +25,16 @@ static uint8_t where_to_add(roster_t *roster, char *name, uint8_t grade) {
   return i;
 }
 
-void init_roster(roster_t *roster) { roster->count = 0; }
+void init_roster(roster_t *roster) {
+  if (roster) // Check for null pointer.
+    roster->count = 0;
+}
 
 bool add_student(roster_t *roster, char *name, uint8_t grade) {
-  if (roster->count == MAX_STUDENTS || student_exists(roster, name)) {
-    // They already exists or MAX_STUDENTS reached.
-    return false;
-  }
+  if (!roster || !name)
+    return false; // Null pointers!!!
+  if (roster->count >= MAX_STUDENTS || student_exists(roster, name))
+    return false; // They already exists or MAX_STUDENTS reached.
 
   // They do not exist, add.
 
