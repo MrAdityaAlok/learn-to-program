@@ -10,7 +10,7 @@ static bool student_exists(roster_t *roster, char *name) {
   return false;
 }
 
-// Determine position where we can add in roster.
+// Determine position where we can add this student in roster.
 static uint8_t where_to_add(roster_t *roster, char *name, uint8_t grade) {
   size_t i = 0;
   for (; i < roster->count; i++) {
@@ -38,13 +38,9 @@ bool add_student(roster_t *roster, char *name, uint8_t grade) {
 
   // They do not exist, add.
 
-  student_t student;
-  student.grade = grade;
-  strcpy(student.name, name);
-
   uint8_t position = where_to_add(roster, name, grade);
   // Inserting in between roaster.
-  if (position != roster->count) { // position can max be roster->count.
+  if (position < roster->count) { // position can max be roster->count.
     // Traverse back and shift elements one position forward from the insertion
     // point.
     for (size_t i = roster->count; i > position; i--) {
