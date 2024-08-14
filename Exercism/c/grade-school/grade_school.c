@@ -35,8 +35,8 @@ bool add_student(roster_t *roster, char *name, uint8_t grade) {
 
   // They do not exist, add.
 
-  student_t student = {grade};
-  // student.grade = grade;
+  student_t student;
+  student.grade = grade;
   strcpy(student.name, name);
 
   uint8_t position = where_to_add(roster, name, grade);
