@@ -1,7 +1,8 @@
 #include "grade_school.h"
+#include <assert.h>
 #include <string.h>
 
-static bool student_exists(roster_t *roster, char *name) {
+static bool student_exists(roster_t *roster, const char *name) {
   for (size_t i = 0; i < roster->count; i++) {
     if (strcmp(roster->students[i].name, name) == 0) {
       return true;
@@ -11,41 +12,38 @@ static bool student_exists(roster_t *roster, char *name) {
 }
 
 // Determine position where we can add this student in roster.
-static uint8_t where_to_add(roster_t *roster, char *name, uint8_t grade) {
-  size_t i = 0;
-  for (; i < roster->count; i++) {
-    if (grade == roster->students[i].grade) {
-      // Same grade students needs to be inserted in dictionary order.
-      if (strcmp(name, roster->students[i].name) < 0)
-        break; // Break if this name comes before student[i].name in dictionary.
-    } else if (grade < roster->students[i].grade) {
-      break; // Brake if this grade is less than next student's grade.
+static size_t where_to_add(roster_t *roster, const char *name, size_t grade) {
+  size_t index = 0;
+  for (; index < roster->count; index++) {
+    if (grade == roster->students[index].grade) {
+      if (strcmp(name, roster->students[index].name) < 0) {
+        break;
+      }
+    } else if (grade < roster->students[index].grade) {
+      break;
     }
   }
-  return i;
+  return index;
 }
 
 void init_roster(roster_t *roster) {
-  if (roster) // Check for null pointer.
+  if (roster) {
     roster->count = 0;
+  }
 }
 
-bool add_student(roster_t *roster, char *name, uint8_t grade) {
-  if (!roster || !name)
-    return false; // Null pointers!!!
-  if (roster->count >= MAX_STUDENTS || student_exists(roster, name))
-    return false; // They already exists or MAX_STUDENTS reached.
+bool add_student(roster_t *roster, const char *name, size_t grade) {
+  assert(roster || name);
+  if (roster->count >= MAX_STUDENTS || strlen(name) > MAX_NAME_LENGTH ||
+      student_exists(roster, name)) {
+    return false;
+  }
 
-  // They do not exist, add.
-
-  uint8_t position = where_to_add(roster, name, grade);
-  // Inserting in between roaster.
-  if (position < roster->count) { // position can max be roster->count.
-    // Traverse back and shift elements one position forward from the insertion
-    // point.
-    for (size_t i = roster->count; i > position; i--) {
-      roster->students[i] = roster->students[i - 1];
-    }
+  size_t position = where_to_add(roster, name, grade);
+  // Traverse back and shift elements one index forward from the insertion
+  // point.
+  for (size_t i = roster->count; i > position; i--) {
+    roster->students[i] = roster->students[i - 1];
   }
 
   roster->students[position].grade = grade;
@@ -54,16 +52,15 @@ bool add_student(roster_t *roster, char *name, uint8_t grade) {
   return true;
 }
 
-roster_t get_grade(roster_t *roster, uint8_t desired_grade) {
+roster_t get_grade(const roster_t *roster, size_t desired_grade) {
   roster_t d_roster = {0};
-  if (roster) { // Null pointer!!!
-    // Since roster is sorted, we need not traverse farther than
-    // roster-->student[i].grade == grade
-    for (size_t i = 0;
-         roster->students[i].grade <= desired_grade && i < roster->count; i++) {
-      if (roster->students[i].grade == desired_grade) {
-        d_roster.students[d_roster.count++] = roster->students[i];
-      }
+  assert(roster);
+  // Since roster is sorted, we need not traverse farther than
+  // roster-->student[i].grade == grade
+  for (size_t i = 0;
+       roster->students[i].grade <= desired_grade && i < roster->count; i++) {
+    if (roster->students[i].grade == desired_grade) {
+      d_roster.students[d_roster.count++] = roster->students[i];
     }
   }
 
